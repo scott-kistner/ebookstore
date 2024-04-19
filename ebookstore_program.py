@@ -4,7 +4,7 @@ import sqlite3
 
 # ====== Functions ======
 # ------- Connecting to Database -------
-def database_connect():
+def database_connection():
     try:
         db = sqlite3.connect('./ebookstore.db') 
         cursor = db.cursor()
@@ -18,7 +18,7 @@ def database_connect():
 # ------- Creating Table -------
 def create_table():
     try:
-        cursor, db = database_connect()
+        cursor, db = database_connection()
         cursor.execute('''
                        CREATE TABLE IF NOT EXISTS 
                        book(id INTEGER PRIMARY KEY, title TEXT, 
@@ -34,7 +34,7 @@ def create_table():
 # ------- Populating Table -------
 def populate_table():
     try:
-        cursor, db = database_connect()
+        cursor, db = database_connection()
         book_catalogue = [(3001, "A Tale of Two Cities", "Charles Dickens", 30), 
                           (3002, "Harry Potter and the Philosopher's Stone", "J.K. Rowling", 40),
                           (3003, "The Lion, the Witch and the Wardrobe", "C.S. Lewis", 25), 
@@ -66,7 +66,7 @@ def populate_table():
 # ------- Entering a new book -------
 def enter_book():
     try:
-        cursor, db = database_connect()
+        cursor, db = database_connection()
 
         
         # Create new id for book based on the largest id value in database.
@@ -103,7 +103,7 @@ def enter_book():
 # ------- Updating an existing book -------
 def update_book():
     try:
-        cursor, db = database_connect()
+        cursor, db = database_connection()
         print("\n****** Current List of Books ******\n")
         cursor.execute('''
                        SELECT * FROM book
@@ -198,7 +198,7 @@ def update_book():
 # ------- Deleting an existing book -------
 def delete_book():
     try:
-        cursor, db = database_connect()
+        cursor, db = database_connection()
         cursor.execute(''' SELECT * FROM book''')
         print("\n****** Current List of Books ******\n")
         for row in cursor:
@@ -221,7 +221,7 @@ def delete_book():
 # ------- Searching for an existing book -------
 def search_book():
     try:
-        cursor, db = database_connect()
+        cursor, db = database_connection()
         find_book_title = input("\nPlease enter the title of the book you'd like to find: ").title()
         cursor.execute('''SELECT id, title, author, qty FROM book WHERE title = ?
                        ''', (find_book_title,))

@@ -102,6 +102,17 @@ def enter_book():
 
 # ------- Updating an existing book -------
 def update_book():
+    
+    """
+    This function allows updating details of an existing book in database.
+
+    Displays a list of books with their IDs, titles, authors, and quantities.
+    Prompts the user to choose an option.
+
+    Input validation is performed for user choices and book details updates.
+    If an error occurs during update or input validation, the transaction is rolled back.
+    """
+
     try:
         cursor, db = database_connection()
         print("\n****** Current List of Books ******\n")
